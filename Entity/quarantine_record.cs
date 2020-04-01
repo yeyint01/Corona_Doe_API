@@ -5,13 +5,13 @@ using Entity.shared;
 
 namespace Entity
 {
-    public class entry_record : common_field
+    public class quarantine_record : common_field
     {
         [AutoPrimaryKey]
-        public int id { get; set; }
-        public int entrypoint_id { get; set; }
-        public DateTime entrance_date { get; set; }
-        public int location_id { get; set; }
+        public int quarantine_id { get; set; }
+        public int station_id { get; set; }
+        public DateTime start_date { get; set; }
+        public DateTime end_date { get; set; }
         public string person_name { get; set; }
         public string person_nrc { get; set; }
         public string person_ph { get; set; }
@@ -26,6 +26,10 @@ namespace Entity
         public string traveled_from { get; set; }
         public string fever_history { get; set; }
         public string remark { get; set; }
+        public DateTime checkout_date { get; set; }
+        public string result { get; set; }
+        public bool checkedout { get; set; }
 
     }
 }
+

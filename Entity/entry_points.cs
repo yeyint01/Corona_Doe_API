@@ -5,6 +5,7 @@ namespace Entity
 {
     public class entry_points : common_field
     {
+        [AutoPrimaryKey]
         public int entrypoint_id { get; set; }
         public string name_en { get; set; }
         public string name_mm { get; set; }

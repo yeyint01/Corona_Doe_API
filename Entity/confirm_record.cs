@@ -5,18 +5,17 @@ using Entity.shared;
 
 namespace Entity
 {
-    public class entry_record : common_field
+    public class confirm_record : common_field
     {
         [AutoPrimaryKey]
-        public int id { get; set; }
-        public int entrypoint_id { get; set; }
-        public DateTime entrance_date { get; set; }
-        public int location_id { get; set; }
-        public string person_name { get; set; }
-        public string person_nrc { get; set; }
-        public string person_ph { get; set; }
-        public string person_age { get; set; }
-        public DateTime person_dob { get; set; }
+        public int patient_id { get; set; }
+        public int quarantine_id { get; set; }
+        public int station_id { get; set; }
+        public string patient_name { get; set;  }
+        public string patient_nrc { get; set; }
+        public string patient_ph { get; set; }
+        public string patient_age { get; set; }
+        public DateTime patient_dob { get; set; }
         public string gender { get; set; }
         public string hometown { get; set; }
         public int reason_id { get; set; }
@@ -26,6 +25,8 @@ namespace Entity
         public string traveled_from { get; set; }
         public string fever_history { get; set; }
         public string remark { get; set; }
+        public DateTime result_date { get; set; }
+        public string result { get; set; }
 
     }
 }

@@ -7,6 +7,7 @@ namespace Entity
 {
     public class region : common_field
     {
+        [AutoPrimaryKey]
         public int region_id { get; set; }
         public string name_en { get; set; }
         public string name_mm { get; set; }
