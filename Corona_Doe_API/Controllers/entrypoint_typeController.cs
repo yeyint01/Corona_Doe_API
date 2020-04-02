@@ -9,27 +9,27 @@ namespace Corona_Doe_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class entry_pointsController : ControllerBase
+    public class entrypoint_typeController : ControllerBase
     {
         [HttpGet]
-        public async Task<IEnumerable<e.entry_points>> Get()
+        public async Task<IEnumerable<e.entrypoint_type>> Get()
         {
-            return await d.entry_points.Get();
+            return await d.entrypoint_type.Get();
         }
 
         [HttpGet("{id}")]
-        public async Task<e.entry_points> Get(int id)
+        public async Task<e.entrypoint_type> Get(int id)
         {
-            return await d.entry_points.Get(id);
+            return await d.entrypoint_type.Get(id);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] e.entry_points obj)
+        public async Task<IActionResult> Post([FromBody] e.entrypoint_type obj)
         {
             try
             {
-                e.shared.ActionResult result = await d.entry_points.Insert(obj);
-                obj.entrypoint_id = int.Parse(result.Value.ToString());
+                e.shared.ActionResult result = await d.entrypoint_type.Insert(obj);
+                obj.entrypoint_type_id = int.Parse(result.Value.ToString());
                 return Ok(obj);
 
             }
@@ -40,12 +40,12 @@ namespace Corona_Doe_API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] e.entry_points obj)
+        public async Task<IActionResult> Put([FromBody] e.entrypoint_type obj)
         {
             try
             {
-                e.shared.ActionResult result = await d.entry_points.Update(obj);
-                return Ok(obj); 
+                e.shared.ActionResult result = await d.entrypoint_type.Update(obj);
+                return Ok(obj);
             }
             catch (Exception ex)
             {
@@ -58,10 +58,10 @@ namespace Corona_Doe_API.Controllers
         {
             try
             {
-                var obj = await d.entry_points.Get(id);
+                var obj = await d.entrypoint_type.Get(id);
                 if (obj == null) return NotFound(id);
 
-                e.shared.ActionResult result = await d.entry_points.Delete(id);
+                e.shared.ActionResult result = await d.entrypoint_type.Delete(id);
                 return Ok();
 
             }
