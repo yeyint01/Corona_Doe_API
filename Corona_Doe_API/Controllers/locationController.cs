@@ -9,27 +9,27 @@ namespace Corona_Doe_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class entry_pointsController : ControllerBase
+    public class locationController : ControllerBase
     {
         [HttpGet]
-        public async Task<IEnumerable<e.entry_points>> Get()
+        public async Task<IEnumerable<e.location>> Get()
         {
-            return await d.entry_points.Get();
+            return await d.location.Get();
         }
 
         [HttpGet("{id}")]
-        public async Task<e.entry_points> Get(int id)
+        public async Task<e.location> Get(int id)
         {
-            return await d.entry_points.Get(id);
+            return await d.location.Get(id);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] e.entry_points obj)
+        public async Task<IActionResult> Post([FromBody] e.location obj)
         {
             try
             {
-                e.shared.ActionResult result = await d.entry_points.Insert(obj);
-                obj.entrypoint_id = int.Parse(result.Value.ToString());
+                e.shared.ActionResult result = await d.location.Insert(obj);
+                obj.location_id = int.Parse(result.Value.ToString());
                 return Ok(obj);
 
             }
@@ -40,12 +40,12 @@ namespace Corona_Doe_API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] e.entry_points obj)
+        public async Task<IActionResult> Put([FromBody] e.location obj)
         {
             try
             {
-                e.shared.ActionResult result = await d.entry_points.Update(obj);
-                return Ok(obj); 
+                e.shared.ActionResult result = await d.location.Update(obj);
+                return Ok(obj);
             }
             catch (Exception ex)
             {
@@ -58,10 +58,10 @@ namespace Corona_Doe_API.Controllers
         {
             try
             {
-                var obj = await d.entry_points.Get(id);
+                var obj = await d.location.Get(id);
                 if (obj == null) return NotFound(id);
 
-                e.shared.ActionResult result = await d.entry_points.Delete(id);
+                e.shared.ActionResult result = await d.location.Delete(id);
                 return Ok();
 
             }

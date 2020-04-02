@@ -9,27 +9,27 @@ namespace Corona_Doe_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class entry_pointsController : ControllerBase
+    public class entry_reasonController : ControllerBase
     {
         [HttpGet]
-        public async Task<IEnumerable<e.entry_points>> Get()
+        public async Task<IEnumerable<e.entry_reason>> Get()
         {
-            return await d.entry_points.Get();
+            return await d.entry_reason.Get();
         }
 
         [HttpGet("{id}")]
-        public async Task<e.entry_points> Get(int id)
+        public async Task<e.entry_reason> Get(int id)
         {
-            return await d.entry_points.Get(id);
+            return await d.entry_reason.Get(id);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] e.entry_points obj)
+        public async Task<IActionResult> Post([FromBody] e.entry_reason obj)
         {
             try
             {
-                e.shared.ActionResult result = await d.entry_points.Insert(obj);
-                obj.entrypoint_id = int.Parse(result.Value.ToString());
+                e.shared.ActionResult result = await d.entry_reason.Insert(obj);
+                obj.reason_id = int.Parse(result.Value.ToString());
                 return Ok(obj);
 
             }
@@ -40,12 +40,12 @@ namespace Corona_Doe_API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] e.entry_points obj)
+        public async Task<IActionResult> Put([FromBody] e.entry_reason obj)
         {
             try
             {
-                e.shared.ActionResult result = await d.entry_points.Update(obj);
-                return Ok(obj); 
+                e.shared.ActionResult result = await d.entry_reason.Update(obj);
+                return Ok(obj);
             }
             catch (Exception ex)
             {

@@ -15,7 +15,7 @@ namespace Entity
         public string patient_nrc { get; set; }
         public string patient_ph { get; set; }
         public string patient_age { get; set; }
-        public DateTime patient_dob { get; set; }
+        public DateTime? patient_dob { get; set; }
         public string gender { get; set; }
         public string hometown { get; set; }
         public Nullable<int> reason_id { get; set; }
@@ -25,7 +25,7 @@ namespace Entity
         public string traveled_from { get; set; }
         public string fever_history { get; set; }
         public string remark { get; set; }
-        public DateTime result_date { get; set; }
+        public DateTime? result_date { get; set; }
         public string result { get; set; }
 
     }
