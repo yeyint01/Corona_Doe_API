@@ -9,7 +9,7 @@ namespace Entity
     {
         [AutoPrimaryKey]
         public int quarantine_id { get; set; }
-        public int station_id { get; set; }
+        public Nullable<int> station_id { get; set; }
         public DateTime start_date { get; set; }
         public DateTime end_date { get; set; }
         public string person_name { get; set; }
@@ -19,7 +19,7 @@ namespace Entity
         public DateTime person_dob { get; set; }
         public string gender { get; set; }
         public string hometown { get; set; }
-        public int reason_id { get; set; }
+        public Nullable<int> reason_id { get; set; }
         public string travel_history { get; set; }
         public string residence_address { get; set; }
         public string current_address { get; set; }

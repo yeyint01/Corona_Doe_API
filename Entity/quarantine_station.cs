@@ -12,7 +12,7 @@ namespace Entity
         public string name_en { get; set; }
         public string name_mm { get; set; }
         public string description { get; set; }
-        public int location_id { get; set; }
+        public Nullable<int> location_id { get; set; }
         public int capacity { get; set; }
         public bool discontinued { get; set; }
         public DateTime discontinued_date { get; set; }
