@@ -29,9 +29,16 @@ namespace Corona_Doe_API.Controllers
         {
             try
             {
-                await d.entry_points.Insert(obj);
-
-                return Ok(obj);
+                e.shared.ActionResult result = await d.entry_points.Insert(obj);
+                if (result.Status == e.shared.Status.Success)
+                {
+                    obj.entrypoint_id = int.Parse(result.Value.ToString());
+                    return Ok(obj);
+                }
+                else
+                {
+                    return BadRequest(result);
+                }
             }
             catch (Exception ex)
             {
