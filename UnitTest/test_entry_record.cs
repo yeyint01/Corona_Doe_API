@@ -10,7 +10,7 @@ namespace UnitTest
     public class test_entry_record
     {
         [TestMethod]
-        public void CRUN()
+        public void CRUD()
         {
             e.entry_record obj = new e.entry_record()
             {
