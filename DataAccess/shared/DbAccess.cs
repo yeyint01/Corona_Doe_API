@@ -29,7 +29,7 @@ namespace DataAccess.shared
 
         public static string InsertAutoId<T>()
         {
-            return "INSERT INTO " + typeof(T).Name + "(" + GetColumns<T>(Coltype.insert) + ") VALUES(" + GetColumns<T>(Coltype.insertv) + ") SELECT SCOPE_IDENTITY()";
+            return "INSERT INTO " + typeof(T).Name + "(" + GetColumns<T>(Coltype.insert) + ") VALUES(" + GetColumns<T>(Coltype.insertv) + "); SELECT CAST(SCOPE_IDENTITY() as int)";
         }
 
         public static string Update<T>()

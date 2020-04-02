@@ -32,9 +32,9 @@ namespace DataAccess
         {
             using (var db = d.ConnectionFactory())
             {
-                await db.ExecuteAsync(d.Insert<e.location_type>(), obj);
+                int id = await db.ExecuteScalarAsync<int>(d.InsertAutoId<e.location_type>(), obj);
 
-                return new e.shared.ActionResult { Status = e.shared.Status.Success };
+                return new e.shared.ActionResult { Status = e.shared.Status.Success, Value = id };
             }
         }
 

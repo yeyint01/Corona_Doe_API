@@ -32,9 +32,12 @@ namespace DataAccess
         {
             using (var db = d.ConnectionFactory())
             {
-                await db.ExecuteAsync(d.Insert<e.location>(), obj);
+                obj.creation_date = DateTime.Now;
+                obj.modified_date = DateTime.Now;
 
-                return new e.shared.ActionResult { Status = e.shared.Status.Success };
+                int id = await db.ExecuteScalarAsync<int>(d.InsertAutoId<e.location>(), obj);
+
+                return new e.shared.ActionResult { Status = e.shared.Status.Success, Value = id };
             }
         }
 
@@ -42,6 +45,8 @@ namespace DataAccess
         {
             using (var db = d.ConnectionFactory())
             {
+                obj.modified_date = DateTime.Now;
+
                 await db.ExecuteAsync(d.Update<e.location>(), obj);
 
                 return new e.shared.ActionResult { Status = e.shared.Status.Success };
