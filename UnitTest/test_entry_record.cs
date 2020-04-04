@@ -15,8 +15,7 @@ namespace UnitTest
             e.entry_record obj = new e.entry_record()
             {
                 entrypoint_id = null,
-                entrance_date = DateTime.Now,
-                location_id = null,
+                entrance_date = DateTime.Now,              
                 person_name = "test person",
                 person_nrc = "test nrc",
                 person_ph = "test phone",

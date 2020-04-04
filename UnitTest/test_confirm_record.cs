@@ -10,6 +10,27 @@ namespace UnitTest
     public class test_confirm_record
     {
         [TestMethod]
+        public void Get()
+        {
+            try
+            {
+                var all = d.confirm_record.Get();
+
+                var result = d.confirm_record.Get(new e.confirm_recordParam
+                {
+                    Name = "AA",
+                    PgNo = 1
+                });
+
+                Assert.IsTrue(true);
+            }
+            catch (Exception ex)
+            {
+                Assert.IsTrue(false);
+            }
+        }
+
+        [TestMethod]
         public void CRUD()
         {
             e.confirm_record obj = new e.confirm_record()

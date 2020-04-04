@@ -17,8 +17,8 @@ namespace UnitTest
                 name_mm = "testing",
                 location_id = null,
                 entrypoint_type_id = null,
-                lat = "lat",
-                lon = "lon",
+                lat = 0,
+                lon = 0,
                 remark = "remark"
             };
 

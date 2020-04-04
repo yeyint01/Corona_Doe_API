@@ -1,7 +1,5 @@
 ﻿using Entity.shared;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entity
 {
@@ -9,7 +7,10 @@ namespace Entity
     {
         [AutoPrimaryKey]
         public int locationtype_id { get; set; }
+        [Required(ErrorMessage = "Please fill english name.")]
+        [StringLength(500, ErrorMessage = "English name too long (500 character limit).")]
         public string name_en { get; set; }
+        [StringLength(500, ErrorMessage = "Myanmar name too long (500 character limit).")]
         public string name_mm { get; set; }
 
     }

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using d = DataAccess.shared.DbAccess;
-using v = DataAccess.shared.Variables;
+﻿using Dapper;
+using System;
 using e = Entity;
 using System.Threading.Tasks;
-using Dapper;
-
+using System.Collections.Generic;
+using d = DataAccess.shared.DbAccess;
+using v = DataAccess.shared.Variables;
+using func = DataAccess.shared.Functions;
 
 namespace DataAccess
 {
@@ -26,6 +25,39 @@ namespace DataAccess
             {
                 return await db.QueryFirstOrDefaultAsync<e.entry_reason>(d.Select<e.entry_reason>(),
                      new { reason_id = id });
+            }
+        }
+
+        public static async Task<e.entry_reasonResult> Get(e.entry_reasonParam param)
+        {
+            using (var db = d.ConnectionFactory())
+            {
+                var result = new e.entry_reasonResult();
+                string condition = "";
+                if (!string.IsNullOrWhiteSpace(param.Name))
+                    condition = @"(name_en Like'%' + @Name + '%' OR name_mm Like '%' + @Name + '%' OR description Like'%' + @Name + '%')";
+
+                if (condition.Length > 1)
+                    condition = "WHERE " + condition;
+
+                using (var multi = await db.QueryMultipleAsync(
+                                    $@"SELECT COUNT(*) 
+                                    FROM entry_reason
+                                    {condition}
+
+                                    SELECT *
+                                    FROM entry_reason
+                                    {condition}
+                                    ORDER BY {param.OrderBy ?? "reason_id"} {(param.Order == e.shared.SortOrder.Descending ? "DESC" : "")}
+                                    OFFSET {v.RowsInPage * (param.PgNo - 1)} ROWS 
+                                    FETCH NEXT {v.RowsInPage} ROWS ONLY", param))
+                {
+                    result.RCount = await multi.ReadFirstAsync<int>();
+                    result.PgCount = func.PageCount(result.RCount);
+                    result.Entry_Reasons = multi.Read<e.entry_reason>();
+                }
+
+                return result;
             }
         }
 

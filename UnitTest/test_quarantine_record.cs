@@ -12,6 +12,11 @@ namespace UnitTest
         [TestMethod]
         public void CRUD()
         {
+            var list = d.quarantine_record.Get(new e.quarantine_recordParam
+            {
+                PgNo = 1
+            });
+
             e.quarantine_record obj = new e.quarantine_record()
             {
                 station_id = null,
@@ -33,6 +38,9 @@ namespace UnitTest
                 remark = "test remark",
                 checkout_date = DateTime.Now,
                 result = "test result",
+                lab_testing=true,
+                lab_testing_date=DateTime.Now,
+                result_date=DateTime.Now,
                 checkedout = false
             };
 

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using d = DataAccess.shared.DbAccess;
-using v = DataAccess.shared.Variables;
+﻿using Dapper;
+using System;
 using e = Entity;
 using System.Threading.Tasks;
-using Dapper;
-
+using System.Collections.Generic;
+using d = DataAccess.shared.DbAccess;
+using v = DataAccess.shared.Variables;
+using func = DataAccess.shared.Functions;
 
 namespace DataAccess
 {
@@ -26,6 +25,41 @@ namespace DataAccess
             {
                 return await db.QueryFirstOrDefaultAsync<e.confirm_record>(d.Select<e.confirm_record>(),
                      new { patient_id = id });
+            }
+        }
+
+        public static async Task<e.confirm_recordResult> Get(e.confirm_recordParam param)
+        {            
+            using (var db = d.ConnectionFactory())
+            {
+                var result = new e.confirm_recordResult();
+                string condition = "";
+                if (!string.IsNullOrWhiteSpace(param.Name))
+                    condition = @"(patient_name Like'%' + @Name + '%' OR patient_nrc Like '%' + @Name + '%' " +
+                                 "OR patient_ph Like'%' + @Name + '%' OR patient_age Like '%' + @Name + '%' OR " +
+                                 "gender Like'%' + @Name + '%' OR hometown Like'%' + @Name + '%')";
+               
+                if (condition.Length > 1)
+                    condition = "WHERE " + condition;
+
+                using (var multi = await db.QueryMultipleAsync(
+                                    $@"SELECT COUNT(*) 
+                                    FROM confirm_record
+                                    {condition}
+
+                                    SELECT *
+                                    FROM confirm_record
+                                    {condition}
+                                    ORDER BY {param.OrderBy ?? "patient_id"} {( param.Order == e.shared.SortOrder.Descending ? "DESC" : "")}
+                                    OFFSET {v.RowsInPage * (param.PgNo - 1)} ROWS 
+                                    FETCH NEXT {v.RowsInPage} ROWS ONLY", param))
+                {
+                    result.RCount = await multi.ReadFirstAsync<int>();
+                    result.PgCount = func.PageCount(result.RCount);
+                    result.Confirm_Records = multi.Read<e.confirm_record>();
+                }
+
+                return result;
             }
         }
 
