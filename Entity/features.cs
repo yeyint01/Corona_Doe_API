@@ -1,5 +1,4 @@
-﻿using System;
-using Entity.shared;
+﻿using Entity.shared;
 using System.ComponentModel.DataAnnotations;
 
 namespace Entity

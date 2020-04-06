@@ -19,7 +19,7 @@ namespace DataAccess
             }
         }
 
-        public static async Task<e.features> Get(int id)
+        public static async Task<e.features> Get(long id)
         {
             using (var db = d.ConnectionFactory())
             {
@@ -54,7 +54,7 @@ namespace DataAccess
                 {
                     result.RCount = await multi.ReadFirstAsync<int>();
                     result.PgCount = func.PageCount(result.RCount);
-                    result.features = multi.Read<e.features>();
+                    result.Features = multi.Read<e.features>();
                 }
 
                 return result;
@@ -68,7 +68,7 @@ namespace DataAccess
                 obj.creation_date = DateTime.Now;
                 obj.modified_date = DateTime.Now;
 
-                int id = await db.ExecuteScalarAsync<int>(d.InsertAutoId<e.features>(), obj);
+                long id = await db.ExecuteScalarAsync<int>(d.InsertAutoId<e.features>(), obj);
 
                 return new e.shared.ActionResult { Status = e.shared.Status.Success, Value = id };
             }
@@ -86,7 +86,7 @@ namespace DataAccess
             }
         }
 
-        public static async Task<e.shared.ActionResult> Delete(int id)
+        public static async Task<e.shared.ActionResult> Delete(long id)
         {
             using (var db = d.ConnectionFactory())
             {

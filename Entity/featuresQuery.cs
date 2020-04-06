@@ -11,6 +11,6 @@ namespace Entity
 
     public class featuresResult : PageInfo
     {
-        public IEnumerable<features> features { get; set; }
+        public IEnumerable<features> Features { get; set; }
     }
 }

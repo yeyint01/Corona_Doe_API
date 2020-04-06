@@ -13,7 +13,7 @@ namespace Entity
         [Required(ErrorMessage = "Please fill patient name.")]
         [StringLength(500, ErrorMessage = "Patient name too long (500 character limit).")]
         public string patient_name { get; set;  }       
-        [StringLength(50, ErrorMessage = "Nrc no. too long (50 character limit).")]
+        [StringLength(50, ErrorMessage = "Nrc too long (50 character limit).")]
         public string patient_nrc { get; set; }
         [Required(ErrorMessage = "Please fill phone number.")]
         [PhoneNumber(ErrorMessage = "Phone number invalid.")]
