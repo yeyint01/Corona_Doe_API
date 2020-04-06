@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using d = DataAccess;
 using e = Entity;
 
@@ -12,9 +12,38 @@ namespace Corona_Doe_API.Controllers
     public class featuresController : ControllerBase
     {
         [HttpGet]
-        public async Task<IEnumerable<e.features>> Get()
+        public async Task<object> Get()
         {
-            return await d.features.Get();
+            var fts = await d.features.Get();
+
+            return new
+            { 
+                type = "FeatureCollection",
+                properties = new { exceededTransferLimit = true },
+                features = fts.Select(f => new
+                { 
+                    type = f.type,
+                    id = f.feature_id,
+                    geometry = new
+                    {
+                        type = f.geometrytype,
+                        coordinates = new[] { f.coordinatesx, f.coordinatesy },
+                    },
+                    properties = new
+                    { 
+                        OBJECTID = f.feature_id,
+                        Name = f.name,
+                        Place = f.place,
+                        Comments = f.comments,
+                        POINT_X = f.pointx,
+                        POINT_Y = f.pointy,
+                        fromTime = f.fromtime,
+                        toTime = f.totime,
+                        sourceOID = f.sourceoid,
+                        stayTimes = f.staytimes
+                    }
+                })
+            };
         }
 
         [HttpGet("{id}")]
