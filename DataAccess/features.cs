@@ -61,6 +61,24 @@ namespace DataAccess
             }
         }
 
+        public static async Task<IEnumerable<string>> GetName()
+        {
+            using (var db = d.ConnectionFactory())
+            {
+                return await db.QueryAsync<string>(@"SELECT DISTINCT(name) FROM features
+                               WHERE features.name IS NOT NULL AND LEN(features.name) > 0");                    
+            }
+        }
+
+        public static async Task<IEnumerable<string>> GetPlace()
+        {
+            using (var db = d.ConnectionFactory())
+            {
+                return await db.QueryAsync<string>(@"SELECT DISTINCT(place) FROM features 
+                            WHERE features.place IS NOT NULL AND LEN(features.place) > 0");
+            }
+        }
+
         public static async Task<e.shared.ActionResult> Insert(e.features obj)
         {
             using (var db = d.ConnectionFactory())

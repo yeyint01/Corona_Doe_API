@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using d = DataAccess;
 using e = Entity;
+using fn = DataAccess.shared.Functions;
 
 namespace Corona_Doe_API.Controllers
 {
@@ -11,8 +12,8 @@ namespace Corona_Doe_API.Controllers
     [ApiController]
     public class featuresController : ControllerBase
     {
-        [HttpGet]
-        public async Task<object> Get()
+        [HttpGet("{rnd}")]
+        public async Task<object> Get(string rnd)
         {
             var fts = await d.features.Get();
 
@@ -40,7 +41,7 @@ namespace Corona_Doe_API.Controllers
                         fromTime = f.fromtime,
                         toTime = f.totime,
                         sourceOID = f.sourceoid,
-                        stayTimes = f.staytimes
+                        stayTimes = fn.GetStayTimeString(f.fromtime, f.totime)
                     }
                 })
             };

@@ -12,13 +12,16 @@ namespace Entity
         public float coordinatesx { get; set; }
         public float coordinatesy { get; set; }
         public long objectid { get; set; }
+        [Required(ErrorMessage = "Please fill full name.")]
         [StringLength(500, ErrorMessage = "Name too long (500 character limit).")]
         public string name { get; set; }
         [StringLength(500, ErrorMessage = "Place too long (500 character limit).")]
         public string place { get; set; }
         [StringLength(500, ErrorMessage = "Comment too long (500 character limit).")]
         public string comments { get; set; }
+        [Range(-90, 90, ErrorMessage = "Invalid latitude")]
         public float pointx { get; set; }
+        [Range(-180, 180, ErrorMessage = "Invalid longitude")]
         public float pointy { get; set; }
         public long fromtime { get; set; }
         public long totime { get; set; }
