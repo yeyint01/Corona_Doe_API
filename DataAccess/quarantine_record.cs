@@ -35,13 +35,13 @@ namespace DataAccess
             {
                 var result = new e.quarantine_recordResult();
                 string condition = "";
-                if (!string.IsNullOrWhiteSpace(param.Name))
-                    condition = @"(person_name Like'%' + @Name + '%' OR person_nrc Like '%' + @Name + '%' " +
-                                 "OR person_ph Like'%' + @Name + '%' OR person_age Like '%' + @Name + '%' OR " +
-                                 "gender Like'%' + @Name + '%' OR hometown Like'%' + @Name + '%')";
-
-                //if (condition.EndsWith(" AND "))
-                //    condition = condition.Remove(condition.LastIndexOf(" AND "));
+                if (!string.IsNullOrWhiteSpace(param.Name) && param.IsMobile)
+                    condition = "(person_name Like'%' + @Name + '%' OR person_ph Like '%' + @Name + '%')";
+                else if (!string.IsNullOrWhiteSpace(param.Name) && !param.IsMobile)
+                    condition = @"(person_name Like'%' + @Name + '%' OR person_nrc Like '%' + @Name + '%'
+                                OR person_ph Like'%' + @Name + '%' OR person_age Like '%' + @Name + '%'
+                                OR gender Like'%' + @Name + '%' OR hometown Like'%' + @Name + '%')";
+              
                 if (condition.Length > 1)
                     condition = "WHERE " + condition;
 

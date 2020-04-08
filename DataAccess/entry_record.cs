@@ -34,10 +34,13 @@ namespace DataAccess
             {
                 var result = new e.entry_recordResult();
                 string condition = "";
-                if (!string.IsNullOrWhiteSpace(param.Name))
-                    condition = @"(person_name Like'%' + @Name + '%' OR person_nrc Like '%' + @Name + '%' " +
-                                "OR person_ph Like'%' + @Name + '%' OR person_age Like '%' + @Name + '%' OR " +
-                                "gender Like'%' + @Name + '%' OR hometown Like'%' + @Name + '%')";
+
+                if (!string.IsNullOrWhiteSpace(param.Name) && param.IsMobile)
+                    condition = "(person_name Like'%' + @Name + '%' OR person_age Like '%' + @Name + '%')";
+                else if(!string.IsNullOrWhiteSpace(param.Name) && !param.IsMobile)
+                    condition = @"(person_name Like'%' + @Name + '%' OR person_age Like '%' + @Name + '%'
+                                OR current_address Like'%' + @Name + '%' OR travel_history Like '%' + @Name + '%' 
+                                OR remark Like'%' + @Name + '%')";
 
                 if (condition.Length > 1)
                     condition = "WHERE " + condition;

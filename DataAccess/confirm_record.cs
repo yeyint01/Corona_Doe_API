@@ -34,10 +34,12 @@ namespace DataAccess
             {
                 var result = new e.confirm_recordResult();
                 string condition = "";
-                if (!string.IsNullOrWhiteSpace(param.Name))
-                    condition = @"(patient_name Like'%' + @Name + '%' OR patient_nrc Like '%' + @Name + '%' " +
-                                 "OR patient_ph Like'%' + @Name + '%' OR patient_age Like '%' + @Name + '%' OR " +
-                                 "gender Like'%' + @Name + '%' OR hometown Like'%' + @Name + '%')";
+                if (!string.IsNullOrWhiteSpace(param.Name) && param.IsMobile)
+                    condition = "(patient_name Like'%' + @Name + '%' OR patient_ph Like '%' + @Name + '%')";
+                else if (!string.IsNullOrWhiteSpace(param.Name) && !param.IsMobile)
+                    condition = @"(patient_name Like'%' + @Name + '%' OR patient_nrc Like '%' + @Name + '%'
+                                OR patient_ph Like'%' + @Name + '%' OR patient_age Like '%' + @Name + '%'
+                                OR gender Like'%' + @Name + '%' OR hometown Like'%' + @Name + '%')";
                
                 if (condition.Length > 1)
                     condition = "WHERE " + condition;

@@ -35,7 +35,7 @@ namespace DataAccess
                 var result = new e.quarantine_stationResult();
                 string condition = "";
                 if (!string.IsNullOrWhiteSpace(param.Name))
-                    condition = @"(name_en Like'%' + @Name + '%' OR name_mm Like '%' + @Name + '%' OR description Like'%' + @Name + '%')";
+                    condition = "(name_en Like'%' + @Name + '%' OR name_mm Like '%' + @Name + '%' OR description Like'%' + @Name + '%')";
 
                 if (condition.Length > 1)
                     condition = "WHERE " + condition;

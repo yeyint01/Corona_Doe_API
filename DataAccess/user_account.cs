@@ -43,9 +43,11 @@ namespace DataAccess
             {
                 var result = new e.user_accountResult();
                 string condition = "";
-                if (!string.IsNullOrWhiteSpace(param.Name))
-                    condition = @"(user_name Like'%' + @Name + '%' OR full_name Like '%' + @Name + '%' " +
-                                "OR phone_no Like'%' + @Name + '%' OR remark Like '%' + @Name + '%')";
+                if (!string.IsNullOrWhiteSpace(param.Name) && param.IsMobile)
+                    condition = "(user_name Like'%' + @Name + '%' OR full_name Like '%' + @Name + '%')";
+                if (!string.IsNullOrWhiteSpace(param.Name) && !param.IsMobile)
+                    condition = @"(user_name Like'%' + @Name + '%' OR full_name Like '%' + @Name + '%'
+                                OR phone_no Like'%' + @Name + '%' OR remark Like '%' + @Name + '%')";
 
                 if (condition.Length > 1)
                     condition = "WHERE " + condition;

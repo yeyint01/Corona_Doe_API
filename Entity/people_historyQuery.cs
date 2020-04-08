@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace Entity
 {
-    public class featuresParam : SortInfo
+    public class people_historyParam : SortInfo
     {
         public string Name { get; set; }
         public int PgNo { get; set; }
         public bool IsMobile { get; set; }
     }
 
-    public class featuresResult : PageInfo
+    public class people_historyResult : PageInfo
     {
-        public IEnumerable<patient_history> Features { get; set; }
+        public IEnumerable<people_history> People_Histories { get; set; }
     }
 }

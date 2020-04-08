@@ -7,6 +7,8 @@ namespace Entity
     {
         public string Name { get; set; }
         public int PgNo { get; set; }
+
+        public bool IsMobile { get; set; }
     }
     public class confirm_recordResult : PageInfo
     {
