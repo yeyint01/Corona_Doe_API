@@ -16,17 +16,11 @@ namespace Corona_Doe_API.Controllers
         {
             return await d.people_history.Get();
         }
-
-        [HttpGet("{id}")]
-        public async Task<e.people_history> Get(string id)
-        {
-            return await d.people_history.Get(id);
-        }
-
+      
         [HttpPost("single")]
-        public async Task<e.people_history> Get([FromBody] e.people_historyQueryInfo obj)
+        public async Task<e.people_history> Get([FromBody] e.people_historyQueryInfo param)
         {
-            return await d.people_history.Get(obj.ph_or_id, obj.visited_at);
+            return await d.people_history.Get(param);
         }
 
         [HttpPost]
@@ -44,14 +38,28 @@ namespace Corona_Doe_API.Controllers
             }
         }
 
-        [HttpPost("insertMany")]
-        public async Task<IActionResult> Post([FromBody] IEnumerable<e.people_history> obj)
+        [HttpPost("insertmany")]
+        public async Task<IActionResult> Post([FromBody] IEnumerable<e.people_history> objs)
         {
             try
             {
-                e.shared.ActionResult result = await d.people_history.InsertMany(obj);
-                return Ok(result.Status);
+                e.shared.ActionResult result = await d.people_history.InsertMany(objs);
 
+                return Ok(result.Status);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] e.people_history obj)
+        {
+            try
+            {
+                e.shared.ActionResult result = await d.people_history.Save(obj);
+                return Ok(obj);
             }
             catch (Exception ex)
             {
@@ -60,14 +68,14 @@ namespace Corona_Doe_API.Controllers
         }
 
         [HttpPost("delete")]
-        public async Task<IActionResult> Delete([FromBody] e.people_historyQueryInfo obj)
+        public async Task<IActionResult> Delete([FromBody] e.people_historyQueryInfo param)
         {
             try
             {
-                var data = await d.people_history.Delete(obj.ph_or_id, obj.visited_at);
-                if (data == null) return NotFound(obj.ph_or_id);
+                var data = await d.people_history.Delete(param);
+                if (data == null) return NotFound(param);
 
-                e.shared.ActionResult result = await d.people_history.Delete(obj.ph_or_id, obj.visited_at);
+                e.shared.ActionResult result = await d.people_history.Delete(param);
                 return Ok(result.Status);
 
             }

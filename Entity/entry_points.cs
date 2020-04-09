@@ -14,6 +14,7 @@ namespace Entity
         [Required(ErrorMessage = "Please fill myanmar name.")]
         [StringLength(500, ErrorMessage = "Myanmar name too long (500 character limit).")]
         public string name_mm { get; set; }
+
         public int category_id { get; set; }
         public Nullable<int> location_id { get; set; }
         public Nullable<int> entrypoint_type_id { get; set; }

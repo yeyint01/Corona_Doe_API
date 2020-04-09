@@ -16,29 +16,50 @@ namespace UnitTest
             {
                 e.people_history people = new e.people_history()
                 {
-                    ph_or_id = "099999999",
-                    visited_at = DateTime.Now,
-                    duration = 0,
+                    mid = "123456",
+                    mhash = "mobile hash",
+                    did = "789456",
+                    dhash = "device hash",
+                    contact = "09789456123",
+                    contacttype = "Friend",
+                    duration = 14,
+                    source = "source",
+                    eventname = "event",
                     lat = 0,
-                    lon = 0,
-                    source_id = "123456"
+                    lng = 0,
+                    location = "Mandalay",
+                    timestamp = DateTime.Now,
+                    remark = "Testing"
+                };                
+
+                var param = new e.people_historyQueryInfo
+                {
+                    mid = people.mid,
+                    did = people.did,
+                    dhash = people.dhash,
+                    mhash = people.dhash
                 };
 
                 //Save
-                e.shared.ActionResult save_action = d.people_history.Save(people).Result;
-
-               // e.shared.ActionResult insert_result = d.people_history.Insert(people).Result;
+                 e.shared.ActionResult save_action = d.people_history.Save(people).Result;                
 
                 //Read
-                var obj = d.people_history.Get(people.ph_or_id, people.visited_at).Result;
+                 var obj = d.people_history.Get(param).Result;
+
+                // Paging
+                var result = d.people_history.Get(new e.people_historyParam
+                {
+                    PgNo = 1
+
+                }).Result;
 
                 //Read all
-                IEnumerable<e.people_history> objs = d.people_history.Get().Result;
-               
-                //Delete
-                e.shared.ActionResult delete_result = d.people_history.Delete(people.ph_or_id, people.visited_at).Result;
+                 IEnumerable<e.people_history> objs = d.people_history.Get().Result;
 
-                Assert.IsTrue(true);
+                //Delete
+                 e.shared.ActionResult delete_result = d.people_history.Delete(param).Result;
+
+                 Assert.IsTrue(true);
             }
             catch (Exception ex)
             {
