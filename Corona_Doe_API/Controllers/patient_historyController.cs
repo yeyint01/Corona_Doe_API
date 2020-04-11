@@ -21,7 +21,7 @@ namespace Corona_Doe_API.Controllers
             { 
                 type = "FeatureCollection",
                 properties = new { exceededTransferLimit = true },
-                patient_history = fts.Select(f => new
+                features = fts.Select(f => new
                 { 
                     type = f.type,
                     id = f.id,
