@@ -14,9 +14,7 @@ namespace UnitTest
             e.entry_points obj = new e.entry_points()
             {
                 name_en = "testing",
-                name_mm = "testing",
-                location_id = null,
-                entrypoint_type_id = null,
+                name_mm = "testing",                         
                 lat = 0,
                 lon = 0,
                 remark = "remark"

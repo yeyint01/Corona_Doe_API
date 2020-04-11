@@ -14,8 +14,7 @@ namespace UnitTest
             e.location obj = new e.location()
             {
                 name_en = "testing",
-                name_mm = "testing",
-                region_id = null,
+                name_mm = "testing",               
                 locationtype_id = null
             };
 

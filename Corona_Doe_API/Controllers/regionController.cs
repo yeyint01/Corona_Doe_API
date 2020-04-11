@@ -27,7 +27,7 @@ namespace Corona_Doe_API.Controllers
         public async Task<IActionResult> Post([FromBody] e.region obj)
         {
             try
-            {
+            {               
                 e.shared.ActionResult result = await d.region.Insert(obj);
                 obj.region_id = int.Parse(result.Value.ToString());
                 return Ok(obj);
@@ -43,7 +43,7 @@ namespace Corona_Doe_API.Controllers
         public async Task<IActionResult> Put([FromBody] e.region obj)
         {
             try
-            {
+            {               
                 e.shared.ActionResult result = await d.region.Update(obj);
                 return Ok(obj);
             }

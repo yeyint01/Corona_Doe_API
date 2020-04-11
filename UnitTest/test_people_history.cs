@@ -34,10 +34,10 @@ namespace UnitTest
 
                 var param = new e.people_historyQueryInfo
                 {
-                    mid = people.mid,
-                    did = people.did,
-                    dhash = people.dhash,
-                    mhash = people.dhash
+                    mid = "",
+                    did = "0",
+                    dhash = "device id",
+                    mhash = "mobile di"
                 };
 
                 //Save

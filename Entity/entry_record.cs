@@ -36,8 +36,11 @@ namespace Entity
         [StringLength(500, ErrorMessage = "Traveled from too long (500 character limit).")]
         public string traveled_from { get; set; }
         [StringLength(500, ErrorMessage = "Fever history too long (500 character limit).")]
-        public string fever_history { get; set; }
+        public string fever_history { get; set; }        
+        [StringLength(50, ErrorMessage = "Personal ID too long (50 character limit).")]
+        public string personal_id { get; set; }        
         [StringLength(500, ErrorMessage = "Remark too long (500 character limit).")]
+        public int? location_id { get; set; }
         public string remark { get; set; }
 
     }

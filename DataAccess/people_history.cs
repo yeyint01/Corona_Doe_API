@@ -32,8 +32,14 @@ namespace DataAccess
         {
             using (var db = d.ConnectionFactory())
             {
-                return await db.QueryFirstOrDefaultAsync<e.people_history>(d.Select<e.people_history>(),
-                     new { mid = param.mid, did = param.did, mhash = param.mhash, dhash = param.dhash });
+                return await db.QueryFirstOrDefaultAsync<e.people_history>(
+                        $@"SELECT * FROM people_history
+                        WHERE {(param.mid != null || param.mid == "" ? "mid=@mid" : "mid IS NULL")} 
+                        AND {(param.did != null || param.did == "" ? "did=@did" : "did IS NULL")} 
+                        AND {(param.mhash != null || param.mhash == "" ? "mhash=@mhash" : "mhash IS NULL")} 
+                        AND {(param.dhash != null || param.dhash == "" ? "dhash=@dhash" : "dhash IS NULL")}",
+
+                     new { param.mid, param.did, param.mhash,param.dhash });
             }
         }
 
@@ -114,8 +120,13 @@ namespace DataAccess
         {
             using (var db = d.ConnectionFactory())
             {
-                await db.ExecuteAsync("DELETE FROM people_history WHERE mid=@mid AND did=@did AND mhash=@mhash AND dhash=@dhash",
-                    new { mid = param.mid, did = param.did, mhash = param.mhash, dhash = param.dhash });
+                await db.ExecuteAsync(
+                    $@"DELETE FROM people_history                    
+                    WHERE {(param.mid != null || param.mid == "" ? "mid=@mid" : "mid IS NULL")} 
+                    AND {(param.did != null || param.did == "" ? "did=@did" : "did IS NULL")} 
+                    AND {(param.mhash != null || param.mhash == "" ? "mhash=@mhash" : "mhash IS NULL")} 
+                    AND {(param.dhash != null || param.dhash == "" ? "dhash=@dhash" : "dhash IS NULL")}",
+                    new { param.mid, param.did, param.mhash, param.dhash });
 
                 return new e.shared.ActionResult { Status = e.shared.Status.Success };
             }

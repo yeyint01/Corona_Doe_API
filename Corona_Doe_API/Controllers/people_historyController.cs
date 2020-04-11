@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using d = DataAccess;
 using e = Entity;
+using fn = Entity.shared.GlobalClass;
 
 namespace Corona_Doe_API.Controllers
 {
@@ -28,6 +29,7 @@ namespace Corona_Doe_API.Controllers
         {
             try
             {
+                obj.timestamp = fn.GetLocalDateTime(obj.timestamp);
                 e.shared.ActionResult result = await d.people_history.Save(obj);
                 return Ok(result.Status);
 
@@ -43,6 +45,9 @@ namespace Corona_Doe_API.Controllers
         {
             try
             {
+                foreach (var obj in objs)
+                    obj.timestamp = fn.GetLocalDateTime(obj.timestamp);
+
                 e.shared.ActionResult result = await d.people_history.InsertMany(objs);
 
                 return Ok(result.Status);
@@ -58,6 +63,7 @@ namespace Corona_Doe_API.Controllers
         {
             try
             {
+                obj.timestamp = fn.GetLocalDateTime(obj.timestamp);
                 e.shared.ActionResult result = await d.people_history.Save(obj);
                 return Ok(obj);
             }

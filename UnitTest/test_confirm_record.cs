@@ -26,7 +26,7 @@ namespace UnitTest
             }
             catch (Exception ex)
             {
-                Assert.IsTrue(false);
+                Assert.IsFalse(false, ex.Message);
             }
         }
 

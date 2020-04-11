@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using d = DataAccess;
 using e = Entity;
+using fn = Entity.shared.GlobalClass;
 
 namespace Corona_Doe_API.Controllers
 {
@@ -28,6 +29,13 @@ namespace Corona_Doe_API.Controllers
         {
             try
             {
+                obj.start_date = fn.GetLocalDateTime(obj.start_date);
+                obj.end_date = fn.GetLocalDateTime(obj.end_date);
+                obj.person_dob = fn.GetLocalDateTime(obj.person_dob);
+                obj.checkout_date = fn.GetLocalDateTime(obj.checkout_date);
+                obj.lab_testing_date = fn.GetLocalDateTime(obj.lab_testing_date);
+                obj.result_date = fn.GetLocalDateTime(obj.result_date);
+
                 e.shared.ActionResult result = await d.quarantine_record.Insert(obj);
                 obj.quarantine_id = int.Parse(result.Value.ToString());
                 return Ok(obj);
@@ -44,6 +52,13 @@ namespace Corona_Doe_API.Controllers
         {
             try
             {
+                obj.start_date = fn.GetLocalDateTime(obj.start_date);
+                obj.end_date = fn.GetLocalDateTime(obj.end_date);
+                obj.person_dob = fn.GetLocalDateTime(obj.person_dob);
+                obj.checkout_date = fn.GetLocalDateTime(obj.checkout_date);
+                obj.lab_testing_date = fn.GetLocalDateTime(obj.lab_testing_date);
+                obj.result_date = fn.GetLocalDateTime(obj.result_date);
+
                 e.shared.ActionResult result = await d.quarantine_record.Update(obj);
                 return Ok(obj);
             }
