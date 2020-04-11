@@ -11,7 +11,7 @@ namespace Entity
         public int? station_id { get; set; }
         public DateTime? start_date { get; set; }
         public DateTime? end_date { get; set; }
-        [Required(ErrorMessage = "Please fill full name.")]
+        [Required(ErrorMessage = "Please fill name.")]
         [StringLength(500, ErrorMessage = "Name too long (500 character limit).")]
         public string person_name { get; set; }
         [StringLength(50, ErrorMessage = "Nrc too long (50 character limit).")]

@@ -27,6 +27,7 @@ namespace Entity
         public bool quarantine_user { get; set; }
         public int? station_id { get; set; }
         public bool active { get; set; }
+        [StringLength(500, ErrorMessage = "Remark too long (500 character limit).")]
         public string remark { get; set; }     
     }
 }

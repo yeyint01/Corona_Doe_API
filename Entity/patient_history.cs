@@ -25,7 +25,7 @@ namespace Entity
         public float pointy { get; set; }
         public long fromtime { get; set; }
         public long totime { get; set; }
-        public int sourceoid { get; set; }
+        public int? sourceoid { get; set; }
         public string staytimes { get; set; }
         [StringLength(500, ErrorMessage = "Remark name too long (500 character limit).")]
         public string remark { get; set; }

@@ -30,11 +30,11 @@ namespace Entity
         public string eventname { get; set; }
         [StringLength(100, ErrorMessage = "Location too long (100 character limit).")]
         public string location { get; set; }
-        [StringLength(100, ErrorMessage = "Remark too long (100 character limit).")]
-        public string remark { get; set; }
         [StringLength(100, ErrorMessage = "Contact too long (100 character limit).")]
         public string contact { get; set; }
         [StringLength(50, ErrorMessage = "Contact type too long (50 character limit).")]
         public string contacttype { get; set; }
+        [StringLength(100, ErrorMessage = "Remark too long (100 character limit).")]
+        public string remark { get; set; }       
     }
 }

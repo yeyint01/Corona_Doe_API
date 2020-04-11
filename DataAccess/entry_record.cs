@@ -66,6 +66,18 @@ namespace DataAccess
             }
         }
 
+        public static async Task<e.entry_record> GetLastRecord()
+        {
+            using (var db = d.ConnectionFactory())
+            {
+                return await db.QueryFirstOrDefaultAsync<e.entry_record>(
+                    @"SELECT * FROM entry_record
+                    WHERE entry_record.id = (
+                    SELECT TOP 1 id FROM entry_record 
+                    ORDER BY entry_record.id DESC);");
+            }
+        }
+
         public static async Task<e.shared.ActionResult> Insert(e.entry_record obj)
         {
             using (var db = d.ConnectionFactory())

@@ -10,7 +10,7 @@ namespace Entity
         public int id { get; set; }
         public int? entrypoint_id { get; set; }
         public DateTime? entrance_date { get; set; }
-        [Required(ErrorMessage = "Please fill full name.")]
+        [Required(ErrorMessage = "Please fill name.")]
         [StringLength(500, ErrorMessage = "Name too long (500 character limit).")]
         public string person_name { get; set; }
         [StringLength(50, ErrorMessage = "Nrc too long (50 character limit).")]
@@ -27,6 +27,7 @@ namespace Entity
         [StringLength(50, ErrorMessage = "Hometown too long (50 character limit).")]
         public string hometown { get; set; }
         public int? reason_id { get; set; }
+        public int? location_id { get; set; }
         [StringLength(500, ErrorMessage = "Travel history too long (500 character limit).")]
         public string travel_history { get; set; }
         [StringLength(500, ErrorMessage = "Residence address too long (500 character limit).")]
@@ -40,7 +41,6 @@ namespace Entity
         [StringLength(50, ErrorMessage = "Personal ID too long (50 character limit).")]
         public string personal_id { get; set; }        
         [StringLength(500, ErrorMessage = "Remark too long (500 character limit).")]
-        public int? location_id { get; set; }
         public string remark { get; set; }
 
     }
