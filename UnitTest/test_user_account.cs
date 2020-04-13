@@ -6,6 +6,7 @@ using System;
 
 namespace UnitTest
 {
+    [TestClass]
     public class test_user_account
     {
         [TestMethod]

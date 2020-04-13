@@ -77,15 +77,16 @@ namespace DataAccess
             }
         }
 
-        //public static async Task<bool> IsExists(e.people_historyQueryInfo param)
-        //{          
-        //    using (var db = d.ConnectionFactory())
-        //    {
-        //        int result = await db.QueryFirstOrDefaultAsync<int>("SELECT 1 FROM people_history WHERE mid=@mid AND did=@did AND mhash=@mhash AND dhash=@dhash",
-        //                     new { param.mid, param.did, param.mhash, param.dhash });
-        //        return result == 1;
-        //    }          
-        //}
+        public static async Task<IEnumerable<string>> GetMobileHashes()
+        {
+            using (var db = d.ConnectionFactory())
+            {
+                return await db.QueryAsync<string>(
+                    @"SELECT DISTINCT(mhash)
+                    FROM people_history
+                    WHERE mhash<>'' AND mhash IS NOT NULL");
+            }
+        }
 
         public static async Task<e.shared.ActionResult> Save(e.people_history obj)
         {
